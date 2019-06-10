@@ -1,3 +1,10 @@
+//defining canvas border 
+//player will not cross these borders
+const UP_BORDER = -25
+const DOWN_BORDER = 400
+const RIGHT_BORDER= 400
+const LEFT_BORDER = 0
+const P_VERTICAL_SPEED = 85 ;
 // Enemies our player must avoid
 let Enemy = class {
     // Variables applied to each of our instances go here,
@@ -20,7 +27,12 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x += 1 * this.speed
+    if (this.x <= RIGHT_BORDER + 300) {
+         this.x += 1 * this.speed } 
+    else {
+        this.x = 0
+    }
+    this.checkCollision() ;
     
 };
 
@@ -40,15 +52,70 @@ let Player = class {
     }
 }
 
-Player.prototype.handleInput = function () {
+Player.prototype.handleInput = function (e) {
+ 
+    if (e=='down') {
+        this.y += P_VERTICAL_SPEED ;
+    } else if ( e=='up') {
+        this.y -= P_VERTICAL_SPEED ;
+    } else if (e=='left') {
+        this.x -= 100 ;
+
+    } else if (e='right') {
+        this.x += 100 ;
+    }
+
+    console.log (this.x)
+    myw =Resources.get(this.sprite) ;
+    console.log(myw.width)  
+
+ 
+}
+
+Enemy.prototype.checkCollision = function() {
 
 }
+
+Player.prototype.checkCollisions = function() {
+    
+    if (this.x == allEnemies[0].x && this.y ==allEnemies[0].y) {
+        this.reset()
+    } 
+
+    if (this.x == allEnemies[1].x && this.y ==allEnemies[1].y) {
+        this.reset()
+    } 
+
+    if (this.x == allEnemies[2].x && this.y ==allEnemies[2].y) {
+        this.reset()
+    } 
+
+    if (this.x == allEnemies[3].x && this.y ==allEnemies[3].y) {
+        this.reset()
+    } 
+}
+
 
 Player.prototype.update = function(){ 
-    this.x += 1 ;
-    this.y += 1 ;
+
+    if (this.y <= UP_BORDER ) {
+        this.y = UP_BORDER ;
+    } else if (this.y >= DOWN_BORDER) {
+        this.y = DOWN_BORDER ;
+    }
+
+    if (this.x <= LEFT_BORDER ) {
+        this.x = LEFT_BORDER ;
+    } else if (this.x >= RIGHT_BORDER) {
+        this.x = RIGHT_BORDER ;
+    }
+  
 }
 
+Player.prototype.reset = function() {
+    this.x = 200 ;
+    this.y = 400 ;
+}
 
 Player.prototype.render = function(){
      ctx.drawImage(Resources.get(this.sprite), this.x, this.y); }
@@ -57,8 +124,8 @@ Player.prototype.render = function(){
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-var allEnemies = [new Enemy(0,0,1),new Enemy(0,60,1.5),new Enemy(0,120,2)];
-var player = new Player('images/char-boy.png',0,0);
+var allEnemies = [new Enemy(0,-25,1),new Enemy(0,60,1),new Enemy(0,145,1),new Enemy(0,230,1)];
+var player = new Player('images/char-boy.png',200,400);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
@@ -72,3 +139,4 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
