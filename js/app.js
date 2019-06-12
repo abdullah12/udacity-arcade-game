@@ -1,3 +1,5 @@
+"use strict"
+
 //defining canvas border 
 //player will not cross these borders
 const UP_BORDER = -25
@@ -32,14 +34,31 @@ Enemy.prototype.update = function(dt) {
     else {
         this.x = 0
     }
-    this.checkCollision() ;
+
+    if (this.checkCollision()) {
+        console.log('hello world') ;
+        player.reset( ) ;
+    }
+
     
 };
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
+
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
 };
+
+Enemy.prototype.checkCollision = function() {
+  if (this.y == player.y) {
+      if (this.x == player.x){
+        return true ;
+      }
+ 
+  }
+  return false
+}
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -64,18 +83,12 @@ Player.prototype.handleInput = function (e) {
     } else if (e='right') {
         this.x += 100 ;
     }
-
-    console.log (this.x)
-    myw =Resources.get(this.sprite) ;
-    console.log(myw.width)  
-
  
 }
 
-Enemy.prototype.checkCollision = function() {
 
-}
 
+/*
 Player.prototype.checkCollisions = function() {
     
     if (this.x == allEnemies[0].x && this.y ==allEnemies[0].y) {
@@ -94,7 +107,7 @@ Player.prototype.checkCollisions = function() {
         this.reset()
     } 
 }
-
+*/
 
 Player.prototype.update = function(){ 
 
