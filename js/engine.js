@@ -24,6 +24,8 @@ var Engine = (function(global) {
         ctx = canvas.getContext('2d'),
         lastTime;
 
+
+
     canvas.width = 505;
     canvas.height = 606;
     doc.body.appendChild(canvas);
@@ -46,6 +48,7 @@ var Engine = (function(global) {
          */
         update(dt);
         render();
+
 
         /* Set our lastTime variable which is used to determine the time delta
          * for the next time this function is called.

@@ -1,12 +1,16 @@
 "use strict"
 
-//defining canvas border 
+//defining canvas border
 //player will not cross these borders
 const UP_BORDER = -25
 const DOWN_BORDER = 400
 const RIGHT_BORDER= 400
 const LEFT_BORDER = 0
 const P_VERTICAL_SPEED = 85 ;
+
+        let scoreElement = document.querySelector("#score") ;
+        let score = 0;
+        scoreElement.innerHTML = score
 // Enemies our player must avoid
 let Enemy = class {
     // Variables applied to each of our instances go here,
@@ -19,7 +23,7 @@ let Enemy = class {
         this.x = x ;
         this.y = y ;
         this.speed = speed ;
- 
+
     }
 
 };
@@ -31,7 +35,7 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     if (this.x <= RIGHT_BORDER + 300) {
-         this.x += 1 * this.speed } 
+         this.x += 1 * this.speed }
     else {
         this.x = 0
     }
@@ -40,8 +44,6 @@ Enemy.prototype.update = function(dt) {
         console.log('hello world') ;
         player.reset( ) ;
     }
-
-    
 };
 
 // Draw the enemy on the screen, required method for game
@@ -52,16 +54,10 @@ Enemy.prototype.render = function() {
 };
 
 Enemy.prototype.checkCollision = function() {
-
-    
      if (this.y > player.y+80 || this.x+80 < player.x || this.y+80 < player.y || this.x > player.x+80) {
-
         return false;
-  
       }
-  
       return true;
-  
     }
 //console.log(Resources.get(this.sprite).width)
 //console.log(Resources.get(player.sprite).width)
@@ -75,12 +71,12 @@ let Player = class {
         this.sprite = sprite ;
         this.x = x ;
         this.y = y
- 
+
     }
 }
 
 Player.prototype.handleInput = function (e) {
- 
+
     if (e=='down') {
         this.y += P_VERTICAL_SPEED ;
     } else if ( e=='up') {
@@ -91,38 +87,24 @@ Player.prototype.handleInput = function (e) {
     } else if (e='right') {
         this.x += 100 ;
     }
- 
+
 }
 
 
+Player.prototype.update = function(){
 
-/*
-Player.prototype.checkCollisions = function() {
-    
-    if (this.x == allEnemies[0].x && this.y ==allEnemies[0].y) {
-        this.reset()
-    } 
 
-    if (this.x == allEnemies[1].x && this.y ==allEnemies[1].y) {
-        this.reset()
-    } 
+    if (this.y == UP_BORDER ) {
+        this.y += 1 //this to prevent the if statement from evaluating to true next frame
+        setTimeout(function(){
+            score = score + 1 ;
+            scoreElement.innerHTML = score ;
+            player.reset()
+        }, 100)
 
-    if (this.x == allEnemies[2].x && this.y ==allEnemies[2].y) {
-        this.reset()
-    } 
-
-    if (this.x == allEnemies[3].x && this.y ==allEnemies[3].y) {
-        this.reset()
-    } 
-}
-*/
-
-Player.prototype.update = function(){ 
-
-    if (this.y <= UP_BORDER ) {
-        this.y = UP_BORDER ;
     } else if (this.y >= DOWN_BORDER) {
         this.y = DOWN_BORDER ;
+
     }
 
     if (this.x <= LEFT_BORDER ) {
@@ -130,7 +112,10 @@ Player.prototype.update = function(){
     } else if (this.x >= RIGHT_BORDER) {
         this.x = RIGHT_BORDER ;
     }
-  
+
+
+
+
 }
 
 Player.prototype.reset = function() {
@@ -139,13 +124,14 @@ Player.prototype.reset = function() {
 }
 
 Player.prototype.render = function(){
-     ctx.drawImage(Resources.get(this.sprite), this.x, this.y); }
+     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-var allEnemies = [new Enemy(0,-25,1),new Enemy(0,60,2),new Enemy(0,145,3),new Enemy(0,230,4)];
+var allEnemies = [new Enemy(0,60,4),new Enemy(0,145,3),new Enemy(0,230,2),new Enemy(0,315,1)];
 var player = new Player('images/char-boy.png',200,400);
 
 // This listens for key presses and sends the keys to your
