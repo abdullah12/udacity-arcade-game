@@ -19,6 +19,7 @@ let Enemy = class {
         this.x = x ;
         this.y = y ;
         this.speed = speed ;
+ 
     }
 
 };
@@ -51,14 +52,20 @@ Enemy.prototype.render = function() {
 };
 
 Enemy.prototype.checkCollision = function() {
-  if (this.y == player.y) {
-      if (this.x == player.x){
-        return true ;
+
+    
+     if (this.y > player.y+80 || this.x+80 < player.x || this.y+80 < player.y || this.x > player.x+80) {
+
+        return false;
+  
       }
- 
-  }
-  return false
-}
+  
+      return true;
+  
+    }
+//console.log(Resources.get(this.sprite).width)
+//console.log(Resources.get(player.sprite).width)
+
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -68,6 +75,7 @@ let Player = class {
         this.sprite = sprite ;
         this.x = x ;
         this.y = y
+ 
     }
 }
 
@@ -137,7 +145,7 @@ Player.prototype.render = function(){
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-var allEnemies = [new Enemy(0,-25,1),new Enemy(0,60,1),new Enemy(0,145,1),new Enemy(0,230,1)];
+var allEnemies = [new Enemy(0,-25,1),new Enemy(0,60,2),new Enemy(0,145,3),new Enemy(0,230,4)];
 var player = new Player('images/char-boy.png',200,400);
 
 // This listens for key presses and sends the keys to your
