@@ -1,36 +1,32 @@
 # Classic Arcade Game Clone Project
 
-## Table of Contents
-
-- [Instructions](#instructions)
-to run the game:
-clone the repo
-1. open the index.html in your browser
-2. clik the link  https://abdullah12.github.io/udacity-arcade-game/
-- [Contributing](#contributing)
 
 
-## Resources
-### extending classes
+# instructions
+
+## to run the game:
+
+  1. clone the repo
+  2. open the index.html in your browser
+  3. clik the link  https://abdullah12.github.io/udacity-arcade-game/
+
+## to play the game:
+1. use arrow key to move the player at the bottom
+2. try to reach the water avoiding to hit the bug
+3. when your reach water your score will increase and the player will reset to 4. the bottom
+
+
+# Resources
+## extending classes
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends
 
-### collision detection
+## collision detection
 https://www.youtube.com/watch?v=hNV-xEMALr8&t=325s
 
-### javascript canvas 2d game programming
+## javascript canvas 2d game programming
 https://www.udemy.com/code-your-first-game/
 
-## Instructions
-
-Use this [rubric](https://review.udacity.com/#!/rubrics/15/view) for self-checking your submission.
-
-Make sure the functions you write are **object-oriented** - either class functions (like `Player` and `Enemy`) or class prototype functions such as `Enemy.prototype.checkCollisions`. Also make sure that the keyword `this` is used appropriately within your class and class prototype functions to refer to the object the function is called upon.
-
-Your **README.md** file should be updated with instructions on both how to 1. Run and 2. Play your arcade game.
-
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
-
-## Contributing
+# Contributing
 
 This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
 
