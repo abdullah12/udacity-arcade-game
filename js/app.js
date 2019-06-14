@@ -11,19 +11,25 @@ const P_VERTICAL_SPEED = 85 ;
         let scoreElement = document.querySelector("#score") ;
         let score = 0;
         scoreElement.innerHTML = score
+
+let GameObject = class {
+    constructor(x, y,sprite) {
+        this.x = x;
+        this.y = y;
+        this.sprite = sprite
+      }
+
+}
 // Enemies our player must avoid
-let Enemy = class {
+class Enemy extends GameObject{
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     constructor (x,y,speed) {
-        this.sprite = 'images/enemy-bug.png';
-        this.x = x ;
-        this.y = y ;
+        super(x,y,'images/enemy-bug.png')
         this.speed = speed ;
-
     }
 
 };
@@ -47,7 +53,7 @@ Enemy.prototype.update = function(dt) {
 };
 
 // Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
+GameObject.prototype.render = function() {
 
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
@@ -59,18 +65,13 @@ Enemy.prototype.checkCollision = function() {
       }
       return true;
     }
-//console.log(Resources.get(this.sprite).width)
-//console.log(Resources.get(player.sprite).width)
-
 
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-let Player = class {
-    constructor(sprite,x,y){
-        this.sprite = sprite ;
-        this.x = x ;
-        this.y = y
+let Player = class extends GameObject {
+    constructor(x,y){
+        super(x,y,'images/char-boy.png')
 
     }
 }
@@ -90,10 +91,7 @@ Player.prototype.handleInput = function (e) {
 
 }
 
-
 Player.prototype.update = function(){
-
-
     if (this.y == UP_BORDER ) {
         this.y += 1 //this to prevent the if statement from evaluating to true next frame
         setTimeout(function(){
@@ -101,10 +99,8 @@ Player.prototype.update = function(){
             scoreElement.innerHTML = score ;
             player.reset()
         }, 100)
-
     } else if (this.y >= DOWN_BORDER) {
         this.y = DOWN_BORDER ;
-
     }
 
     if (this.x <= LEFT_BORDER ) {
@@ -112,10 +108,6 @@ Player.prototype.update = function(){
     } else if (this.x >= RIGHT_BORDER) {
         this.x = RIGHT_BORDER ;
     }
-
-
-
-
 }
 
 Player.prototype.reset = function() {
@@ -123,16 +115,13 @@ Player.prototype.reset = function() {
     this.y = 400 ;
 }
 
-Player.prototype.render = function(){
-     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    }
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-var allEnemies = [new Enemy(0,60,4),new Enemy(0,145,3),new Enemy(0,230,2),new Enemy(0,315,1)];
-var player = new Player('images/char-boy.png',200,400);
+let allEnemies = [new Enemy(0,60,4),new Enemy(0,145,3),new Enemy(0,230,2),new Enemy(0,315,1)];
+let player = new Player(200,400);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

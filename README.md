@@ -3,7 +3,22 @@
 ## Table of Contents
 
 - [Instructions](#instructions)
+to run the game:
+clone the repo
+1. open the index.html in your browser
+2. clik the link  https://abdullah12.github.io/udacity-arcade-game/
 - [Contributing](#contributing)
+
+
+## Resources
+### extending classes
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends
+
+### collision detection
+https://www.youtube.com/watch?v=hNV-xEMALr8&t=325s
+
+### javascript canvas 2d game programming
+https://www.udemy.com/code-your-first-game/
 
 ## Instructions
 
@@ -18,3 +33,4 @@ For detailed instructions on how to get started, check out this [guide](https://
 ## Contributing
 
 This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+
